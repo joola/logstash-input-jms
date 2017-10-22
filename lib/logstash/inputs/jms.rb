@@ -3,6 +3,8 @@ require "logstash/inputs/base"
 require "logstash/inputs/threadable"
 require "logstash/namespace"
 
+require "uri"
+
 # Read events from a Jms Broker. Supports both Jms Queues and Topics.
 #
 # For more information about Jms, see <http://docs.oracle.com/javaee/6/tutorial/doc/bncdq.html>
@@ -126,7 +128,13 @@ class LogStash::Inputs::Jms < LogStash::Inputs::Threadable
       }
     end
 
-    @logger.debug("JMS Config being used", :context => @jms_config)
+    @logger.debug("JMS Config being used", @jms_config)
+    ccdt = @jms_config[:ccdt]
+    unless ccdt.to_s.strip.empty?
+      @logger.info('Found CCDT reference in configuration',  :ccdt => ccdt)
+      ccdt = URI.parse(ccdt)
+      @jms_config[:ccdt] = ccdt
+    end
 
   end # def register
 

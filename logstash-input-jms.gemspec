@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name            = 'logstash-input-jms'
-  s.version         = '3.0.3'
+  s.version         = '3.0.4'
   s.licenses        = ['Apache License (2.0)']
   s.summary         = "Pull events from a JMS topic or queue."
   s.description     = "This gem is a Logstash plugin required to be installed on top of the Logstash core pipeline using $LS_HOME/bin/logstash-plugin install gemname. This gem is not a stand-alone program"
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   if RUBY_PLATFORM == 'java'
     s.platform = RUBY_PLATFORM
-    s.add_runtime_dependency "jruby-jms", ">= 1.2.0" #(Apache 2.0 license)
+    s.add_runtime_dependency "jruby-jms", "~> 1.2", ">= 1.2.0" #(Apache 2.0 license)
   end
-  s.add_development_dependency 'logstash-devutils'
+  s.add_development_dependency 'logstash-devutils', "~> 1"
 end
